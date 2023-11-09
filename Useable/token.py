@@ -3,6 +3,10 @@ import jwt, datetime
 from webApi.models import *
 
 def UserGenerateToken(fetchuser):
+    """
+    Generate JWT token for User
+    and save the token in User-JWT-Whitelist table
+    """
     try:
         secret_key = config("user_jwt_token")
         total_days = 1
@@ -24,4 +28,25 @@ def UserGenerateToken(fetchuser):
         return {"status": True, "token" : token, "payload": detail_payload}
     except Exception as e:
         return {"status": False, "message": f"Error during generationg token {str(e)}"}
+
+
+def UserDeleteToken(fetchuser, request):
+    """
+    Delete the Users authenticate token 
+    as well as delete users all expiry tokens
+    expiry token can get when we decode the token
+    """
+    try:
+        token = request.META["HTTP_AUTHORIZATION"][7:]
+        whitelist_token = UserJWTWhiteListToken.objects.filter(user_id = fetchuser, token = token).first()
+        whitelist_token.delete()
+        user_all_tokens = UserJWTWhiteListToken.objects.filter(user_id = fetchuser)
+        for fetch_token in user_all_tokens:
+            try:
+                decode_token = jwt.decode(fetch_token.token, config('user_jwt_token'), "HS256")
+            except:    
+                fetch_token.delete()
+        return True
+    except Exception :
+        return False
 

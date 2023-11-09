@@ -1,10 +1,18 @@
-
+"""
+Modeule : useable.py
+"""
 def check_pass_len(passwprd):
+    """
+    check password lenth
+    """
     if len(passwprd) < 8:
         return False
     return True
 
 def require_field_validation(requestdata, requirefield):
+    """
+    check if any field is missing or empty
+    """
     requie_field = []
     unfilled_field = []
 

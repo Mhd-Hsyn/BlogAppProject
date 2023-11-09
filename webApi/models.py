@@ -68,7 +68,7 @@ class BlogPost(BaseModel):
 
     title = models.CharField(max_length=50, default="")
     content = models.TextField(default="")
-    image = models.ImageField(upload_to="Blog/", default="")
+    image = models.ImageField(upload_to="Blog/", default="Blog/dummy.png")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     category_id = models.ForeignKey(
         Category, on_delete=models.CASCADE, blank=True, null=True
@@ -88,4 +88,4 @@ class Comments(BaseModel):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self) -> str:
-        return f"Comment by {self.user_id.fname} on {self.blog_post_id.title} Blog Post"
+        return f"Comment by {self.user_id.fname}-{self.user_id.lname}  on {self.blog_post_id.title} Blog Post"
