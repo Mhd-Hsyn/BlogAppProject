@@ -44,7 +44,7 @@ class UserAuthViewset(ModelViewSet):
                     serializer.save()
                     return Response(
                         {"status": True, "message": "User created Successfully"},
-                        status=200,
+                        status=201,
                     )
                 return Response(
                     {"status": False, "error": serializer.errors}, status=400
@@ -77,21 +77,20 @@ class UserAuthViewset(ModelViewSet):
                 serializer = UserLoginSerializer(data=request.data)
                 if serializer.is_valid():
                     fetch_user = serializer.validated_data["fetch_user"]
-                    print(fetch_user.id)
-                    admin_token = _auth.UserGenerateToken(fetch_user)
-                    if admin_token["status"]:
+                    user_token = _auth.UserGenerateToken(fetch_user)
+                    if user_token["status"]:
                         return Response(
                             {
                                 "status": True,
-                                "msg": "Login Successfully",
-                                "token": admin_token["token"],
-                                "payload": admin_token["payload"],
+                                "message": "Login Successfully",
+                                "token": user_token["token"],
+                                "payload": user_token["payload"],
                             },
                             status=200,
                         )
 
                     return Response(
-                        {"status": False, "error": admin_token["message"]}, status=400
+                        {"status": False, "error": user_token["message"]}, status=400
                     )
                 return Response(
                     {"status": False, "error": serializer.errors}, status=400
@@ -168,7 +167,7 @@ class UserApi(ModelViewSet):
                             serializer.save()
                             return Response(
                                 {"status": True, "message": "Blog Added Successfully"},
-                                status=200,
+                                status=201,
                             )
                         return Response(
                             {"status": False, "error": serializer.errors}, status=400
@@ -319,7 +318,7 @@ class UserApi(ModelViewSet):
                         serializer.save()
                         return Response(
                             {"status": True, "message": "Comment posted Successfully"},
-                            status=200,
+                            status=201,
                         )
                     return Response(
                         {"status": False, "error": serializer.errors}, status=400
