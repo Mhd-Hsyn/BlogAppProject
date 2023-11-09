@@ -1,0 +1,6 @@
+.env
+__pycache__/
+mirations/
+db.sqlite3
+.vscode
+*.vscode
