@@ -1,0 +1,14 @@
+fileignoreconfig:
+- filename: BlogAppProject/settings.py
+  checksum: c1305abf4da06e3f67e3a676da64dc17479a7a48740636a3ef0368e671f534cc
+- filename: Useable/token.py
+  checksum: d6c42f69f16f386afb380fd7108c367a4dd3b4b4bf691e28406b7ed663d6c401
+- filename: webApi/models.py
+  checksum: 729b37a0aabb0026c3ce9516210c0d90c1e4b1ae82fb9306efc7a7e9b63498a9
+- filename: webApi/serializers.py
+  checksum: 1234b6403468f711b55505a548c551b38140003e33dd6a5dd4e2eaafa0283cf8
+- filename: webApi/test/model_test.py
+  checksum: b4b66d36e22d76db0b070d1ff04b864433382c8c17081aa948e6f35061852631
+- filename: webApi/test/views_test.py
+  checksum: 015146360f5fbf99e20dda12835317599c5200d120b309ee12b7c5079e47aa99
+version: "1.0"
